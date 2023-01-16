@@ -56,3 +56,4 @@ export default function useIpfsFactory () {
 
   return { ipfs, isIpfsReady, ipfsInitError }
 }
+

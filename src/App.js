@@ -6,8 +6,9 @@ import ipfsLogo from './ipfs-logo.svg'
 import './App.css';
 
 function App() {
-  const { ipfs, ipfsInitError } = useIpfsFactory({ commands: ['id'] })
+  const { ipfs, ipfsInitError, isIpfsReady } = useIpfsFactory({ commands: ['id'] })
   const id = useIpfs(ipfs, 'id')
+
   const [version, setVersion] = useState(null)
 
   useEffect(() => {
@@ -18,8 +19,36 @@ function App() {
       setVersion(nodeId);
     }
 
+    if(isIpfsReady){
+      console.log("zero")
+      getDataFromCid()
+    }
+
     getVersion();
-  }, [ipfs])
+  }, [ipfs, isIpfsReady])
+
+  const getDataFromCid = async ()=>{
+//        const Added = await ipfs.get("bafybeig4iqf7livb2llaqzkp67lduixhlozgz67gvkdci3imdcgu35z4wa");
+//        console.log(Added);
+//   for await (const item of Added) {
+//   console.log('item', item.path);
+//   return;
+// } 
+
+const cid = "https://ipfs.io/ipfs/bafybeieq4zdzd27urcmrmndcatte6ctb2f6wid3md2vrgyolzx7x67yxse/chunks/"
+// console.log("hello", await await ipfs.ls(cid))
+// const hello = await ipfs.files.ls(cid)
+// const hello2 =  hello.next()
+// // console.log("hello", hello2.next())
+
+// hello2.then(function(result) {
+//    console.log(result) // "Some User token"
+// })
+
+for await (const file of await ipfs.ls(cid)) {
+  console.log(file.path)
+}
+  }
 
   return (
     <div className='sans-serif'>
