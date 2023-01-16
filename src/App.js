@@ -37,7 +37,7 @@ function App() {
         return;
         } 
     // using ls
-    const cid = "https://ipfs.io/ipfs/bafybeieq4zdzd27urcmrmndcatte6ctb2f6wid3md2vrgyolzx7x67yxse/chunks/"
+    const cid = "bafybeieq4zdzd27urcmrmndcatte6ctb2f6wid3md2vrgyolzx7x67yxse"
       for await (const file of await ipfs.ls(cid)) {
         console.log(file.path)
       }
